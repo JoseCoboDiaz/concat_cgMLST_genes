@@ -27,6 +27,12 @@ puts gene
 end
 aa.close
 
+`egrep -w 'polymorphic|summary' output_*/allele_calling.txt > allele_calling_temp.txt`
+`Rscript transpose.R`
+`rm allele_calling_temp.txt`
+
+
+
 genes=[]
 code=''
 dd=File.open("allele_calling_mod.txt").each_line do |line|
@@ -34,8 +40,10 @@ line.chomp!
 #7618_Egypt27	2	12	...
 	if line =~ /gene/ 
 	genes=line.split("\t")
+	genes.unshift("genomes")	# to avoid a problem with transpose.R output
 	elsif line =~ /summary/ # dirty way to not write the last row (summary row)
 	else
+	line=line.gsub("\s","")
 	out.puts ">#{line.split("\t")[0]}\_#{ngenes}genes_cgMLST"
 [*1..ngenes].each {|x| 		
 	code="#{genes[x]}\_#{line.split("\t")[x]}"	# asterisc to create an array from 1 to ngenes (the column 0 is the genome name)
