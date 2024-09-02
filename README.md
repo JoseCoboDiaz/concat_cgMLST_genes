@@ -1,7 +1,7 @@
 # concat_cgMLST_genes
 A ruby script to concatenate cgMLST genes obtained by fast-GeP (https://github.com/jizhang-nz/fast-GeP).
 
-It is important that you also need R software installed, because a R-script will be used to transpose the data matrix.
+It is <i>important </i> that you also need R software installed, because a R-script will be used to transpose the data matrix.
 
 To run this pipeline place the 2 scripts at the same folder where the Ge_P output folders are located (it will use scheme_* folder) and tip the next command on the terminal:
 	
